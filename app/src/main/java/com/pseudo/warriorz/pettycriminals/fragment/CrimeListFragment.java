@@ -11,9 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.pseudo.warriorz.pettycriminals.Activity.CrimeActivity;
+import com.pseudo.warriorz.pettycriminals.Activity.CrimePagerActivity;
 import com.pseudo.warriorz.pettycriminals.R;
 import com.pseudo.warriorz.pettycriminals.model.Crime;
 import com.pseudo.warriorz.pettycriminals.singleton.CrimeLab;
@@ -93,7 +92,7 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivityForResult(intent, REQUEST_CRIME);
         }
     }
