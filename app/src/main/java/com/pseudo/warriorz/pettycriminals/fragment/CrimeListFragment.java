@@ -17,6 +17,7 @@ import com.pseudo.warriorz.pettycriminals.R;
 import com.pseudo.warriorz.pettycriminals.model.Crime;
 import com.pseudo.warriorz.pettycriminals.singleton.CrimeLab;
 
+import java.text.DateFormat;
 import java.util.List;
 
 public class CrimeListFragment extends Fragment {
@@ -86,7 +87,7 @@ public class CrimeListFragment extends Fragment {
         public void bindCrime(Crime crime) {
             mCrime = crime;
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+            mDateTextView.setText(DateFormat.getDateInstance().format(mCrime.getDate()));
             mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
 
