@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Environment;
 
 import com.pseudo.warriorz.pettycriminals.model.Crime;
 import com.pseudo.warriorz.pettycriminals.sqlite.CrimeBaseHelper;
@@ -12,6 +13,7 @@ import com.pseudo.warriorz.pettycriminals.sqlite.CrimeCursorWrapper;
 import com.pseudo.warriorz.pettycriminals.sqlite.CrimeDbSchema;
 import com.pseudo.warriorz.pettycriminals.sqlite.CrimeDbSchema.CrimeTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -81,6 +83,19 @@ public class CrimeLab {
         } finally {
             crimeCursorWrapper.close();
         }
+    }
+
+    //This code does not create any files on the filesystem.
+    // It only returns File objects that point to the right locations.
+    // It does perform one check: it verifies that there is external storage to save them to.
+    // If there is no external storage, getExternalFilesDir(String) will return null.
+    public File getPhotoFile(Crime crime) {
+        File externalFilesDir = mContext
+                .getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        if (externalFilesDir == null) {
+            return null;
+        }
+        return new File(externalFilesDir, crime.getPhotoFilename());
     }
 
     private static ContentValues getContentValues(Crime crime) {
